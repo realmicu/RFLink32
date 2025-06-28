@@ -31,8 +31,8 @@
  * internal or external sensor.
  *
  * Method of detecting unit type based on packet contents is unknown - there are no specific bits that potentially
- * can indicate if device supports humidity reading or not. For '77' humidity field is still used but its value is
- * observed to be 0x1D or 0xED (which corresponds to '77TH' values of 28 and 27).
+ * can indicate if device supports humidity reading or not. For '77' humidity field is still used but it does not
+ * contain actual measurement - observed values are 0x1D, 0x9D or 0xED with no apparent meaning.
  *
  * Checksum is suspected to be located at last 4 bits but its algorithm is unknown (not standard CRC-4).
  *
