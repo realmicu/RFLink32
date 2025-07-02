@@ -56,7 +56,7 @@ void splash_OLED()
 void print_OLED()
 {
     /*
-    static char delim[2] = ";";
+    static char delim[2] = ",";
     static char *ptr;
     static boolean ret;
 
@@ -76,7 +76,7 @@ void print_OLED()
     }
 */
     u8x8log.print('\f');
-    replacechar(pbuffer, ';', '\n');
+    replacechar(pbuffer, ',', '\n');
     u8x8log.print(pbuffer);
 }
 

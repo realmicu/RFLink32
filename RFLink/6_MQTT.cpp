@@ -330,7 +330,7 @@ void publishMsg()
 
   if (!MQTTClient.connected())
     reconnect(1);
-  MQTTClient.publish(params::topic_out.c_str(), pbuffer, MQTT_RETAINED);
+  MQTTClient.publish(params::topic_out.c_str(), pbuffer + 6, MQTT_RETAINED);
 }
 
 void checkMQTTloop()
