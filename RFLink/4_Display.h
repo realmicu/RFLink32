@@ -27,6 +27,7 @@ void display_IDc(const char *);
 void display_SWITCH(byte);
 void display_SWITCHc(const char *);
 void display_CHAN(byte);
+void display_CHANn(byte);
 enum CMD_Group
 {
     CMD_Single,
