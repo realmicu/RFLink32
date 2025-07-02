@@ -417,6 +417,13 @@ void display_CHAN(byte channel)
   strcat(pbuffer, dbuffer);
 }
 
+// Channel (numerical)
+void display_CHANn(byte channel)
+{
+  sprintf_P(dbuffer, PSTR("%s%d"), PSTR(",\"ch\":"), channel);
+  strcat(pbuffer, dbuffer);
+}
+
 // DEBUG=..... => provide DEBUG Data
 void display_DEBUG(byte data[], unsigned int size)
 {
