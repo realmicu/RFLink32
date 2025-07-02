@@ -203,7 +203,7 @@ namespace RFLink {
       String debugmsg;
 #endif
 
-      WiFiClient newClient = server.available();
+      WiFiClient newClient = server.accept();
 
       if (newClient.connected()) {
         if (isNewClient(newClient)) {
