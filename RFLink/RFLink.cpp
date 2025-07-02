@@ -89,9 +89,9 @@ namespace RFLink {
       Serial.println(F(__FILE__)); // "RFLink.ino" version is in 20;00 Message
       Serial.println(F("Compiled on :\t\t" __DATE__ " at " __TIME__));
 
-      display_Header();
-      display_Splash();
-      display_Footer();
+      char buffer[32];
+      snprintf_P(buffer, 31, PSTR("*** RFLink_ESP_%d.%d-%s ***"), BUILDNR, REVNR, PSTR(RFLINK_BUILDNAME));
+      Serial.println(buffer);
 
 #ifdef SERIAL_ENABLED
       Serial.print(pbuffer);
@@ -187,7 +187,7 @@ namespace RFLink {
       if (pbuffer[0] != 0) {
 
 #ifdef SERIAL_ENABLED
-        Serial.print(pbuffer);
+        Serial.println(pbuffer);
 #endif
 
 #ifndef RFLINK_MQTT_DISABLED
@@ -315,12 +315,12 @@ namespace RFLink {
           // -------------------------------------------------------
           if (strncasecmp(cmd + 3, "PING;", 5) == 0) {
             display_Header();
-            display_Name(PSTR("PONG"));
-            display_Footer();
+            display_Text(PSTR("\"result\":\"PONG\""));
+            display_FooterSm();
           } else if (strncasecmp(cmd + 3, "REBOOT;", 7) == 0) {
             display_Header();
-            display_Name(PSTR("REBOOT"));
-            display_Footer();
+            display_Text(PSTR("\"result\":\"REBOOT\""));
+            display_FooterSm();
             CallReboot();
           } else if (strncasecmp(cmd + 3, "RFDEBUG=O", 9) == 0) {
             if (cmd[12] == 'N' || cmd[12] == 'n') {
@@ -329,13 +329,13 @@ namespace RFLink {
               RFUDebug = false;  // undecoded debug off
               QRFUDebug = false; // q undecoded debug off
               display_Header();
-              display_Name(PSTR("RFDEBUG=ON"));
-              display_Footer();
+              display_Text(PSTR("\"RFDEBUG\":\"ON\""));
+              display_FooterSm();
             } else {
               RFDebug = false; // full debug off
               display_Header();
-              display_Name(PSTR("RFDEBUG=OFF"));
-              display_Footer();
+              display_Text(PSTR("\"RFDEBUG\":\"OFF\""));
+              display_FooterSm();
             }
           } else if (strncasecmp(cmd + 3, "RFUDEBUG=O", 10) == 0) {
             if (cmd[13] == 'N' || cmd[13] == 'n') {
@@ -344,13 +344,13 @@ namespace RFLink {
               RFUDebug = true;   // undecoded debug on
               QRFUDebug = false; // q undecoded debug off
               display_Header();
-              display_Name(PSTR("RFUDEBUG=ON"));
-              display_Footer();
+              display_Text(PSTR("\"RFUDEBUG\":\"ON\""));
+              display_FooterSm();
             } else {
               RFUDebug = false; // undecoded debug off
               display_Header();
-              display_Name(PSTR("RFUDEBUG=OFF"));
-              display_Footer();
+              display_Text(PSTR("\"RFUDEBUG\":\"OFF\""));
+              display_FooterSm();
             }
           } else if (strncasecmp(cmd + 3, "QRFDEBUG=O", 10) == 0) {
             if (cmd[13] == 'N' || cmd[13] == 'n') {
@@ -359,13 +359,13 @@ namespace RFLink {
               RFUDebug = false;  // undecoded debug off
               QRFUDebug = false; // q undecoded debug off
               display_Header();
-              display_Name(PSTR("QRFDEBUG=ON"));
-              display_Footer();
+              display_Text(PSTR("\"QRFDEBUG\":\"ON\""));
+              display_FooterSm();
             } else {
               QRFDebug = false; // q debug off
               display_Header();
-              display_Name(PSTR("QRFDEBUG=OFF"));
-              display_Footer();
+              display_Text(PSTR("\"QRFDEBUG\":\"OFF\""));
+              display_FooterSm();
             }
           } else if (strncasecmp(cmd + 3, "QRFUDEBUG=O", 11) == 0) {
             if (cmd[14] == 'N' || cmd[14] == 'n') {
@@ -374,18 +374,18 @@ namespace RFLink {
               RFUDebug = false; // undecoded debug off
               QRFUDebug = true; // q undecoded debug on
               display_Header();
-              display_Name(PSTR("QRFUDEBUG=ON"));
-              display_Footer();
+              display_Text(PSTR("\"QRFUDEBUG\":\"ON\""));
+              display_FooterSm();
             } else {
               QRFUDebug = false; // q undecode debug off
               display_Header();
-              display_Name(PSTR("QRFUDEBUG=OFF"));
-              display_Footer();
+              display_Text(PSTR("\"QRFUDEBUG\":\"OFF\""));
+              display_FooterSm();
             }
           } else if (strncasecmp(cmd + 3, "VERSION", 7) == 0) {
             display_Header();
             display_Splash();
-            display_Footer();
+            display_FooterSm();
           } else if (strncasecmp(cmd + 3, "signal", 6) == 0) {
             Signal::executeCliCommand(cmd + 3 + 6 + 1);
           } else if (strncasecmp(cmd + 3, "config", 6) == 0) {
@@ -396,8 +396,8 @@ namespace RFLink {
             // -------------------------------------------------------
             if (Radio::pins::TX_DATA == NOT_A_PIN) {
               display_Header();
-              display_Name(PSTR("ERROR: TX_DATA PIN is not defined!"));
-              display_Footer();
+              display_Text(PSTR("\"error\":\"TX_DATA PIN is not defined!\""));
+              display_FooterSm();
             }
             else {
               Radio::set_Radio_mode(Radio::Radio_TX);
@@ -414,10 +414,10 @@ namespace RFLink {
       if (ValidCommand != 0) {
         display_Header();
         if (ValidCommand == 1)
-          display_Name(PSTR("OK"));
+          display_Text(PSTR("\"success\":\"OK\""));
         else
-          display_Name(PSTR("CMD UNKNOWN"));
-        display_Footer();
+          display_Text(PSTR("\"error\":\"CMD UNKNOWN\""));
+        display_FooterSm();
       }
       ValidCommand = 0;
       sendMsgFromBuffer(); // in case there is a response waiting to be sent

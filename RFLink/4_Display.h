@@ -10,15 +10,17 @@
 
 #include <Arduino.h>
 
-#define PRINT_BUFFER_SIZE 120 // 90         // Maximum number of characters that a command should print in one go via the print buffer.
+#define PRINT_BUFFER_SIZE 240 // 90         // Maximum number of characters that a command should print in one go via the print buffer.
 
 // extern byte PKSequenceNumber;     // 1 byte packet counter
 extern char pbuffer[PRINT_BUFFER_SIZE]; // Buffer for printing data
 
+void display_Text(const char *);
 void display_Header(void);
 void display_Name(const char *);
 void display_NameEx(const char *name, unsigned int id);
 void display_Footer(void);
+void display_FooterSm(void);
 void display_Splash(void);
 void display_IDn(unsigned long, byte);
 void display_IDc(const char *);
