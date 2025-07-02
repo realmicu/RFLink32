@@ -236,7 +236,7 @@ boolean Plugin_051(byte function, const char *string)
   display_Header();
   display_Name(PSTR(PLUGIN_051_ID));
   display_IDn(id, 2);
-  display_CHAN(ch);
+  display_CHANn(ch);
   display_TEMPD(temp);
   display_TREND(trend);
   display_HUM(hum);
