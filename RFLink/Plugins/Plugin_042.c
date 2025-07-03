@@ -235,9 +235,7 @@ boolean Plugin_042(byte function, const char *string)
          //==================================================================================
          display_Header();
          display_Name(PSTR("UPM/Esic"));
-         char c_ID[5];
-         sprintf(c_ID, "%02X%02X", rc, devicecode);
-         display_IDc(c_ID);
+         display_IDn((rc << 4) | devicecode, 2);
          display_WINSP(winds);
          display_WINDIR(windd);
          //==================================================================================
@@ -252,9 +250,7 @@ boolean Plugin_042(byte function, const char *string)
          //==================================================================================
          display_Header();
          display_Name(PSTR("UPM/Esic"));
-         char c_ID[5];
-         sprintf(c_ID, "%02X%02X", rc, devicecode);
-         display_IDc(c_ID);
+         display_IDn((rc << 4) | devicecode, 2);
          display_RAIN(rain);
          //==================================================================================
       }
@@ -275,9 +271,7 @@ boolean Plugin_042(byte function, const char *string)
          //==================================================================================
          display_Header();
          display_Name(PSTR("UPM/Esic"));
-         char c_ID[5];
-         sprintf(c_ID, "%02X%02X", rc, devicecode);
-         display_IDc(c_ID);
+         display_IDn((rc << 4) | devicecode, 2);
          display_TEMP(temperature);
          display_HUM(humidity); // Humidity 0x15 = 21% decimal
          //==================================================================================
@@ -298,9 +292,7 @@ boolean Plugin_042(byte function, const char *string)
       //==================================================================================
       display_Header();
       display_Name(PSTR("UPM/Esic F2"));
-      char c_ID[5];
-      sprintf(c_ID, "%02X%02X", rc, devicecode);
-      display_IDc(c_ID);
+      display_IDn((rc << 4) | devicecode, 2);
       display_TEMP(temperature);
       display_HUM(humidity); // Humidity 0x15 = 21% decimal
    }
