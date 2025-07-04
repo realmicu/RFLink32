@@ -414,7 +414,7 @@ namespace RFLink {
       if (ValidCommand != 0) {
         display_Header();
         if (ValidCommand == 1)
-          display_Text(PSTR("\"success\":\"OK\""));
+          display_Text(PSTR("\"result\":\"OK\""));
         else
           display_Text(PSTR("\"error\":\"CMD UNKNOWN\""));
         display_FooterSm();
