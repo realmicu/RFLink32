@@ -187,7 +187,7 @@ boolean Plugin_051(byte function, const char *string)
       hum |= mask;
     mask <<= 1;
   }
-  hum = 100 - ( ~hum + 1 );
+  hum = 100 - (~hum + 1);
 
   // temperature: 12-bit reversed
   mask = 1;
@@ -213,14 +213,14 @@ boolean Plugin_051(byte function, const char *string)
     mask <<= 1;
   }
   id = (hdr & 0x0ff0) >> 4;  // device ID includes channel
-  ch = ( hdr & 0x00c0) >> 6 ;
-  batlow = ( hdr & 0x0008) >> 3;
-  trend = ( hdr & 0x0006) >> 1;
+  ch = (hdr & 0x00c0) >> 6 ;
+  batlow = (hdr & 0x0008) >> 3;
+  trend = (hdr & 0x0006) >> 1;
 
   //==================================================================================
   // Prevent repeating signals from showing up
   //==================================================================================
-  bitstream = ( hdr << 20 ) | ( tmpu << 8 ) | hum;  // reconstruct bitsteam-like word
+  bitstream = (hdr << 20) | (tmpu << 8) | hum;  // reconstruct bitsteam-like word
   if ((SignalHash != SignalHashPrevious) || (RepeatingTimer + 600 < millis()) || (SignalCRC != bitstream))
     SignalCRC = bitstream; // not seen the RF packet recently
   else {
