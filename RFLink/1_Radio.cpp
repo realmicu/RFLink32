@@ -659,8 +659,8 @@ namespace RFLink { namespace Radio  {
     {
       // TX Pins
       delayMicroseconds(TRANSMITTER_STABLE_DELAY_US);
+      setPinMode(pins::TX_DATA, OUTPUT);    // Generates noise if set to INPUT
       safeDigitalWrite(pins::TX_DATA, LOW);  // No more signal
-      setPinMode(pins::TX_DATA, INPUT);     //
       setPinMode(pins::TX_NA, INPUT);       //
       setPinMode(pins::TX_NMOS, OUTPUT);    // MOSFET, always output
       setPinMode(pins::TX_PMOS, OUTPUT);    // MOSFET, always output
